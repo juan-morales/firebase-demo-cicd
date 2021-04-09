@@ -1,16 +1,26 @@
+const express = require('express');
+const cors = require('cors');
+
 const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access Firestore.
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-exports.addMessage = functions.https.onRequest(async (request, response) => {
-    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
+const app = express();
+
+app.use(cors({
+    origin: true
+}));
+
+app.use(express.json());
+
+app.post('/messages', async (request, response) => {
     try {
-        const original = request.query.text;
+        const data = request.body;
     
         const writeResult = await admin.firestore().collection('messages').add({
-            original: original
+            original: data.text
         });
     
         return response.json({
@@ -23,7 +33,7 @@ exports.addMessage = functions.https.onRequest(async (request, response) => {
     }
 });
 
-exports.getMessage = functions.https.onRequest(async (request, response) => {
+app.get('/messages/:id', async (request, response) => {
     try {
         const documentId = request.query.id; 
         const documentRef = await admin.firestore().collection('messages').doc(documentId);
@@ -40,8 +50,7 @@ exports.getMessage = functions.https.onRequest(async (request, response) => {
     }
 });
 
-exports.listMessages = functions.https.onRequest(async (request, response) => {
-    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
+app.get('/messages', async (request, response) => {
     try {
         const fnGetAllMessages = async () => {
             const resultsRef = await admin.firestore().collection('messages').get();
@@ -67,9 +76,10 @@ exports.listMessages = functions.https.onRequest(async (request, response) => {
     }
 });
 
-exports.deleteMessage = functions.https.onRequest(async (request, response) => {
+app.delete('/messages',async (request, response) => {
     try {
-        const documentId = request.query.id;
+        const data = request.body;
+        const documentId = data.id;
         const documentRef = await admin.firestore().collection('messages').doc(documentId).delete();
         
         return response.json({
@@ -94,3 +104,5 @@ exports.makeUpperCase = functions.firestore.document('/messages/{documentId}')
             uppercase
         }, {merge: true});
     });
+
+exports.app = functions.https.onRequest(app);
