@@ -1,0 +1,33 @@
+{
+  "name": "firebase-demo-cicd",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "preinstall": "cd functions && npm ci",
+    "deploy": "firebase deploy --only functions,hosting",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "serve": "npm run serve:firebase",
+    "serve:firebase": "firebase emulators:start",
+    "test": "npx folio --config=folio.config.js",
+    "test:update": "npm test -- --update-snapshots",
+    "test:debug": "PWDEBUG=1 npm test",
+    "test:record": "node tests/record.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juan-morales/firebase-demo-cicd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juan-morales/firebase-demo-cicd/issues"
+  },
+  "homepage": "https://github.com/juan-morales/firebase-demo-cicd#readme",
+  "devDependencies": {
+    "@playwright/test": "github:microsoft/playwright-test#41299d06b3032139ab585507f20eabc398fdd0dd",
+    "playwright": "^1.10.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
