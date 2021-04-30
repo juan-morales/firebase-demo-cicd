@@ -7,7 +7,8 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "test": "cd ./test/e2e/ && node demo_test.js"
   },
   "engines": {
     "node": "8"
@@ -19,9 +20,11 @@
     "firebase-functions": "^3.13.2"
   },
   "devDependencies": {
+    "@playwright/test": "github:microsoft/playwright-test#41299d06b3032139ab585507f20eabc398fdd0dd",
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "playwright": "^1.10.0"
   },
   "private": true
 }
