@@ -1,25 +1,24 @@
 name: Executes the e2e tests on pull request
-on:
-    "pull_request"
+on: pull_request
 jobs:
-    execute_e2e_tests:
-        runs-on: ubuntu-tatest
-            steps:
-                - uses: actions/checkout@v2
-                - name: Install dependencies
-                - run: npm ci && npm run build
-                #- uses: actions/setup-java@v1
-                #    with:
-                #        java-version: '12.0.2'
-                #        java-package: 'jdk'
-                #- name: Setup Emulator 
-                #- uses: w9jds/firebase-action@v1.3.1
-                #    env:
-                #        JAVA_HOME: ${{ env.JAVA_HOME }}
-                #        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-                #        GCLOUD_PROJECT: ${{ secrets.nextGCLOUD_PROJECT }}
-                #        PROJECT_ID: ${{ secrets.nextFIREBASE_PROJECTID }}
-                #    with:
-                #        args: setup:emulators:firestore
-                - run: npm install -g firebase-tools
-                - run: firebase emulators:exec "npm run test"
+  execute_e2e_tests:
+    runs-on: ubuntu-tatest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+        - run: npm ci && npm run build
+        #- uses: actions/setup-java@v1
+        #    with:
+        #        java-version: '12.0.2'
+        #        java-package: 'jdk'
+        #- name: Setup Emulator 
+        #- uses: w9jds/firebase-action@v1.3.1
+        #    env:
+        #        JAVA_HOME: ${{ env.JAVA_HOME }}
+        #        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        #        GCLOUD_PROJECT: ${{ secrets.nextGCLOUD_PROJECT }}
+        #        PROJECT_ID: ${{ secrets.nextFIREBASE_PROJECTID }}
+        #    with:
+        #        args: setup:emulators:firestore
+        - run: npm install -g firebase-tools
+        - run: firebase emulators:exec "npm run test"
