@@ -1,5 +1,8 @@
 name: Executes the e2e tests on pull request
-on: pull_request
+on:
+  push:
+    branches:
+      - main
 jobs:
   execute_e2e_tests:
     runs-on: ubuntu-tatest
