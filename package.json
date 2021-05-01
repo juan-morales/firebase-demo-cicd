@@ -25,6 +25,7 @@
   "homepage": "https://github.com/juan-morales/firebase-demo-cicd#readme",
   "devDependencies": {
     "@playwright/test": "github:microsoft/playwright-test#41299d06b3032139ab585507f20eabc398fdd0dd",
+    "firebase-tools": "^9.10.0",
     "playwright": "^1.10.0"
   },
   "dependencies": {

@@ -9,6 +9,15 @@ const SNAPSHOT_OPTIONS = {
     threshold: 0.1,
 };
 
+test("dummy test", async ({ page, browserName }) => {
+    await page.goto(BASE_URL);
+    await page.pause();
+
+    const htmlelement = await page.innerHTML("h2");
+    expect(htmlelement).toBe("Message manager (CRUD)");
+});
+
+/*
 test("compares page screenshot", async ({ page, browserName }) => {
     await page.goto(BASE_URL);
     await page.pause();
@@ -19,7 +28,7 @@ test("compares page screenshot", async ({ page, browserName }) => {
         SNAPSHOT_OPTIONS
     );
 });
-
+*/
 // /** @type {import('playwright').Browser} */
 // let browser;
 
