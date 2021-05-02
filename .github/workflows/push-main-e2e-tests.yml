@@ -13,5 +13,5 @@ jobs:
         run: npm ci
       - name: Install Firebase Tools globally
         run: npm install firebase-tools
-      - name: Alias firebase
+      - name: Alias firebase command
         run: alias firebase="./node_modules/.bin/firebase"; firebase emulators:exec "npm run test"
