@@ -17,6 +17,26 @@ test("dummy test", async ({ page, browserName }) => {
     expect(htmlelement).toBe("Message manager (CRUD)");
 });
 
+test("add a record", async ({page, browserName}) => {
+    await page.goto(BASE_URL);
+    await page.pause();
+
+    //const btnNewMessage = await page.innerHTML("#btnNewMessage");
+    await page.click("#btnNewMessage");
+    expect(await page.isVisible("#addMessageSection")).toBe(true);
+
+    await page.fill("#frmAddMessage > input[type=text]", "test record");
+    await page.click("#frmAddMessage > button");
+    
+    await page.reload();
+    expect(await page.isHidden("#addMessageSection")).toBe(true);
+    expect(await page.isVisible("#messageList")).toBe(true);
+
+    const length = await page.$$eval('#messageList > ul', (items) => items.length);
+    expect(length === 1).toBeTruthy();
+
+    expect(await page.textContent("#messageList > ul > li")).toBe("test record / TEST RECORD Delete");
+});
 /*
 test("compares page screenshot", async ({ page, browserName }) => {
     await page.goto(BASE_URL);

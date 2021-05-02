@@ -11,7 +11,8 @@
     "test": "npx folio --config=folio.config.js",
     "test:update": "npm test -- --update-snapshots",
     "test:debug": "PWDEBUG=1 npm test",
-    "test:record": "node tests/record.js"
+    "test:record": "node tests/record.js",
+    "killport" : "lsof -ti tcp:8080 | xargs kill"
   },
   "repository": {
     "type": "git",
